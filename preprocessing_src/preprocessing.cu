@@ -1,11 +1,21 @@
 #include "preprocessing.h"
 #include <cuda.h>
+#include <cuda_runtime.h>
 #include <stdio.h>
 #include <vector>
 #include <algorithm>
 
 #define kg_min(a, b) ((a) < (b) ? (a) : (b))
 #define kg_max(a, b) ((a) > (b) ? (a) : (b))
+
+#define CUDA_CHECK(call) \
+    do { \
+        cudaError_t err = call; \
+        if (err != cudaSuccess) { \
+            fprintf(stderr, "CUDA error at %s:%d: %s\n", __FILE__, __LINE__, cudaGetErrorString(err)); \
+            exit(1); \
+        } \
+    } while(0)
 
 // Simple partition function for row panels (hetero+ kernels)
 void partition_row_panels(int m, int nnz, int *RowPtr, int wsize, 
@@ -87,12 +97,12 @@ int64_t preprocessing_cuda(int m, int nnz, int *RowPtr, int *ColIdx, bool long_d
         info->rp_n_host = 1;  // At least one dummy entry
         host_rp.push_back(row_panel(0, 0, 0, 0));
     }
-    cudaMalloc(&info->rp_info, host_rp.size() * sizeof(row_panel));
-    cudaMalloc(&info->rp_n, sizeof(int));
-    cudaMemcpy(info->rp_info, host_rp.data(), host_rp.size() * sizeof(row_panel), 
-               cudaMemcpyHostToDevice);
+    CUDA_CHECK(cudaMalloc(&info->rp_info, host_rp.size() * sizeof(row_panel)));
+    CUDA_CHECK(cudaMalloc(&info->rp_n, sizeof(int)));
+    CUDA_CHECK(cudaMemcpy(info->rp_info, host_rp.data(), host_rp.size() * sizeof(row_panel), 
+               cudaMemcpyHostToDevice));
     int rp_n = info->rp_n_host;
-    cudaMemcpy(info->rp_n, &rp_n, sizeof(int), cudaMemcpyHostToDevice);
+    CUDA_CHECK(cudaMemcpy(info->rp_n, &rp_n, sizeof(int), cudaMemcpyHostToDevice));
     
     // Partition for edge panels (edge-parallel kernels)
     std::vector<row_panel> host_ep;
@@ -104,12 +114,12 @@ int64_t preprocessing_cuda(int m, int nnz, int *RowPtr, int *ColIdx, bool long_d
         info->ep_n_host = 1;  // At least one dummy entry
         host_ep.push_back(row_panel(0, 0, 0, 0));
     }
-    cudaMalloc(&info->ep_info, host_ep.size() * sizeof(row_panel));
-    cudaMalloc(&info->ep_n, sizeof(int));
-    cudaMemcpy(info->ep_info, host_ep.data(), host_ep.size() * sizeof(row_panel), 
-               cudaMemcpyHostToDevice);
+    CUDA_CHECK(cudaMalloc(&info->ep_info, host_ep.size() * sizeof(row_panel)));
+    CUDA_CHECK(cudaMalloc(&info->ep_n, sizeof(int)));
+    CUDA_CHECK(cudaMemcpy(info->ep_info, host_ep.data(), host_ep.size() * sizeof(row_panel), 
+               cudaMemcpyHostToDevice));
     int ep_n = info->ep_n_host;
-    cudaMemcpy(info->ep_n, &ep_n, sizeof(int), cudaMemcpyHostToDevice);
+    CUDA_CHECK(cudaMemcpy(info->ep_n, &ep_n, sizeof(int), cudaMemcpyHostToDevice));
     
     // Partition for neighbor groups (ngd kernels)
     std::vector<neighbor_group> host_ng;
@@ -121,12 +131,25 @@ int64_t preprocessing_cuda(int m, int nnz, int *RowPtr, int *ColIdx, bool long_d
         info->ng_n_host = 1;  // At least one dummy entry
         host_ng.push_back(neighbor_group(0, 0));
     }
-    cudaMalloc(&info->ng_info, host_ng.size() * sizeof(neighbor_group));
-    cudaMalloc(&info->ng_n, sizeof(int));
-    cudaMemcpy(info->ng_info, host_ng.data(), host_ng.size() * sizeof(neighbor_group), 
-               cudaMemcpyHostToDevice);
+    CUDA_CHECK(cudaMalloc(&info->ng_info, host_ng.size() * sizeof(neighbor_group)));
+    CUDA_CHECK(cudaMalloc(&info->ng_n, sizeof(int)));
+    CUDA_CHECK(cudaMemcpy(info->ng_info, host_ng.data(), host_ng.size() * sizeof(neighbor_group), 
+               cudaMemcpyHostToDevice));
     int ng_n = info->ng_n_host;
-    cudaMemcpy(info->ng_n, &ng_n, sizeof(int), cudaMemcpyHostToDevice);
+    CUDA_CHECK(cudaMemcpy(info->ng_n, &ng_n, sizeof(int), cudaMemcpyHostToDevice));
+    
+    // Synchronize to ensure all operations complete
+    CUDA_CHECK(cudaDeviceSynchronize());
+    
+    // Debug: verify all pointers are valid
+    if (!info->rp_info || !info->rp_n || !info->ep_info || !info->ep_n || 
+        !info->ng_info || !info->ng_n) {
+        fprintf(stderr, "ERROR: Some pointers are null after allocation!\n");
+        fprintf(stderr, "rp_info: %p, rp_n: %p\n", info->rp_info, info->rp_n);
+        fprintf(stderr, "ep_info: %p, ep_n: %p\n", info->ep_info, info->ep_n);
+        fprintf(stderr, "ng_info: %p, ng_n: %p\n", info->ng_info, info->ng_n);
+        exit(1);
+    }
     
     return (int64_t)info;
 }
