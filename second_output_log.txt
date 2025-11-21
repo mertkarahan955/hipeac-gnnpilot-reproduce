@@ -1,0 +1,68 @@
+(gnnpilot_fresh) mertkarahan@mertubuntu:~/GNNPilot-main$ bash build_and_run.sh test/bcsstk13.mtx 
+^[[A-- The CXX compiler identification is GNU 9.4.0
+-- The CUDA compiler identification is NVIDIA 11.4.48
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Check for working CUDA compiler: /usr/local/cuda-11.4/bin/nvcc
+-- Check for working CUDA compiler: /usr/local/cuda-11.4/bin/nvcc -- works
+-- Detecting CUDA compiler ABI info
+-- Detecting CUDA compiler ABI info - done
+-- Looking for C++ include pthread.h
+-- Looking for C++ include pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Found CUDA: /usr/local/cuda-11.4 (found version "11.4") 
+-- Found CUDA: /usr/local/cuda-11.4 (found version "11.4") 
+-- Caffe2: CUDA detected: 11.4
+-- Caffe2: CUDA nvcc is: /usr/local/cuda-11.4/bin/nvcc
+-- Caffe2: CUDA toolkit directory: /usr/local/cuda-11.4
+-- Caffe2: Header version is: 11.4
+-- Found CUDNN: /usr/local/cuda-11.4/lib64/libcudnn.so  
+-- Found cuDNN: v8.2.4  (include: /usr/local/cuda-11.4/include, library: /usr/local/cuda-11.4/lib64/libcudnn.so)
+-- /usr/local/cuda-11.4/lib64/libnvrtc.so shorthash is 9d774d23
+-- Autodetected CUDA architecture(s):  6.1
+-- Added CUDA NVCC flags for: -gencode;arch=compute_61,code=sm_61
+CMake Warning at /home/mertkarahan/miniforge/envs/gnnpilot3/lib/python3.9/site-packages/torch/share/cmake/Torch/TorchConfig.cmake:22 (message):
+  static library kineto_LIBRARY-NOTFOUND not found.
+Call Stack (most recent call first):
+  /home/mertkarahan/miniforge/envs/gnnpilot3/lib/python3.9/site-packages/torch/share/cmake/Torch/TorchConfig.cmake:127 (append_torchlib_if_found)
+  CMakeLists.txt:6 (find_package)
+
+
+-- Found Torch: /home/mertkarahan/miniforge/envs/gnnpilot3/lib/python3.9/site-packages/torch/lib/libtorch.so  
+-- Found Python3: /home/mertkarahan/miniforge/envs/gnnpilot_fresh/lib/libpython3.9.so (found version "3.9") found components: Development 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/mertkarahan/GNNPilot-main/build
+Scanning dependencies of target gat
+[ 66%] Building CUDA object CMakeFiles/gat.dir/preprocessing_src/preprocessing.cu.o
+[ 66%] Building CUDA object CMakeFiles/gat.dir/gat.cu.o
+[100%] Linking CUDA shared library libgat.so
+/usr/bin/ld: cannot find -lmkl_intel_ilp64
+/usr/bin/ld: cannot find -lmkl_intel_thread
+/usr/bin/ld: cannot find -lmkl_core
+collect2: error: ld returned 1 exit status
+make[2]: *** [CMakeFiles/gat.dir/build.make:116: libgat.so] Error 1
+make[1]: *** [CMakeFiles/Makefile2:76: CMakeFiles/gat.dir/all] Error 2
+make: *** [Makefile:84: all] Error 2
+Traceback (most recent call last):
+  File "/home/mertkarahan/GNNPilot-main/test/test_kernel.py", line 40, in <module>
+    graph_coo = read_mtx(dataset_dir)
+  File "/home/mertkarahan/GNNPilot-main/test/load_dataset.py", line 5, in read_mtx
+    adata = sc.read(filename)
+  File "/home/mertkarahan/miniforge/envs/gnnpilot_fresh/lib/python3.9/site-packages/legacy_api_wrap/__init__.py", line 88, in fn_compatible
+    return fn(*args_all, **kw)
+  File "/home/mertkarahan/miniforge/envs/gnnpilot_fresh/lib/python3.9/site-packages/scanpy/readwrite.py", line 130, in read
+    return _read(
+  File "/home/mertkarahan/miniforge/envs/gnnpilot_fresh/lib/python3.9/site-packages/scanpy/readwrite.py", line 781, in _read
+    raise FileNotFoundError(f"Did not find file {filename}.")
+FileNotFoundError: Did not find file test/bcsstk13.mtx.
