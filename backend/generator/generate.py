@@ -64,6 +64,9 @@ def generate_code_head(f):
     "#define HE_BLOCK_WARP_SIZE (HE_BLOCK_SIZE / WARP_SIZE)\n" \
     "#define NGD_BLOCK_SIZE 128\n" \
     "#define NGD_BLOCK_WARP_SIZE (NGD_BLOCK_SIZE / WARP_SIZE)\n" \
+    "#define DP_NNZ_PER_WARP 128\n" \
+    "#define DP_BLOCK_SIZE 128\n" \
+    "#define DP_NNZ_PER_BLOCK (DP_NNZ_PER_WARP * DP_BLOCK_SIZE / WARP_SIZE)\n" \
     "#define kg_max(a, b) ((a)>(b)? (a): (b))\n"
     "#define kg_min(a, b) ((a)<(b)? (a): (b))\n\n"
     "extern int64_t preprocessing_cuda(int m, int nnz, int *RowPtr, int *ColIdx, bool long_dynamic);\n"
