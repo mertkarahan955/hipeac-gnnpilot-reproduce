@@ -4,7 +4,7 @@ import torch.nn.functional as F
 import torch.nn as nn
 from load_dataset import *
 
-torch.ops.load_library("../KG_GNN/build/libKGGNN.so")
+torch.ops.load_library("../build/libgat.so")
 
 from utils import *
 import sys
@@ -120,7 +120,7 @@ h = torch.zeros(nnz, 1).to(device)
 ho = torch.zeros(nnz, 1).to(device)
 
 perf_time_start("preprocessing")
-info = torch.ops.KGGNN.preprocessing(rowptr, indices, 1)
+info = torch.ops.gatlib.preprocessing(rowptr, indices, 1)
 perf_time_end()
 
 perf_time_start("warmup")
