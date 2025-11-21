@@ -1,0 +1,18 @@
+Scanning dependencies of target gat
+[ 66%] Building CUDA object CMakeFiles/gat.dir/preprocessing_src/preprocessing.cu.o
+[ 66%] Building CUDA object CMakeFiles/gat.dir/gat.cu.o
+[100%] Linking CUDA shared library libgat.so
+[100%] Built target gat
+layer feature:  32 64 32
+Num nodes: 2003
+Num edges: 83883
+Average degree: 41.88
+Variation degree: 520.30
+Max degree: 95.00
+Traceback (most recent call last):
+  File "/home/mertkarahan/GNNPilot-main/test/test_kernel.py", line 123, in <module>
+    info = torch.ops.KGGNN.preprocessing(rowptr, indices, 1)
+  File "/home/mertkarahan/miniforge/envs/gnnpilot_fresh/lib/python3.9/site-packages/torch/_ops.py", line 63, in __getattr__
+    op = torch._C._jit_get_operation(qualified_op_name)
+RuntimeError: No such operator KGGNN::preprocessing
+(gnnpilot_fresh) mertkarahan@mertubuntu:~/GNNPilot-main$ 
