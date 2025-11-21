@@ -19,9 +19,17 @@
 
 extern int64_t preprocessing_cuda(int m, int nnz, int *RowPtr, int *ColIdx, bool long_dynamic);
 int64_t preprocessing(torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t long_dynamic) {
+fprintf(stderr, "DEBUG preprocessing (wrapper): RowPtr.size(0)=%ld, ColIdx.size(0)=%ld\n", 
+        RowPtr.size(0), ColIdx.size(0));
+fflush(stderr);
 int m = RowPtr.size(0) - 1;
 int nnz = ColIdx.size(0);
-return preprocessing_cuda(m, nnz, RowPtr.data_ptr<int>(), ColIdx.data_ptr<int>(), long_dynamic);
+fprintf(stderr, "DEBUG preprocessing (wrapper): m=%d, nnz=%d, calling preprocessing_cuda...\n", m, nnz);
+fflush(stderr);
+int64_t result = preprocessing_cuda(m, nnz, RowPtr.data_ptr<int>(), ColIdx.data_ptr<int>(), long_dynamic);
+fprintf(stderr, "DEBUG preprocessing (wrapper): preprocessing_cuda returned %lld\n", (long long)result);
+fflush(stderr);
+return result;
 }
 
 __device__ static float atomicMax_float(float* addr, float val) {
