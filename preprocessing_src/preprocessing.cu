@@ -83,7 +83,17 @@ void partition_neighbor_groups(int m, int nnz, int *RowPtr,
 
 // Main preprocessing function
 int64_t preprocessing_cuda(int m, int nnz, int *RowPtr, int *ColIdx, bool long_dynamic) {
+    fprintf(stderr, "DEBUG preprocessing_cuda: m=%d, nnz=%d\n", m, nnz);
+    fflush(stderr);
+    
     kg_info* info = new kg_info();
+    if (!info) {
+        fprintf(stderr, "ERROR: Failed to allocate kg_info\n");
+        fflush(stderr);
+        return 0;
+    }
+    fprintf(stderr, "DEBUG: Allocated kg_info at %p\n", (void*)info);
+    fflush(stderr);
     
     int wsize = 32;  // Warp size
     
@@ -142,15 +152,29 @@ int64_t preprocessing_cuda(int m, int nnz, int *RowPtr, int *ColIdx, bool long_d
     CUDA_CHECK(cudaDeviceSynchronize());
     
     // Debug: verify all pointers are valid
+    fprintf(stderr, "DEBUG: Verifying pointers...\n");
+    fprintf(stderr, "rp_info: %p, rp_n: %p, rp_n_host: %d\n", 
+            (void*)info->rp_info, (void*)info->rp_n, info->rp_n_host);
+    fprintf(stderr, "ep_info: %p, ep_n: %p, ep_n_host: %d\n", 
+            (void*)info->ep_info, (void*)info->ep_n, info->ep_n_host);
+    fprintf(stderr, "ng_info: %p, ng_n: %p, ng_n_host: %d\n", 
+            (void*)info->ng_info, (void*)info->ng_n, info->ng_n_host);
+    fflush(stderr);
+    
     if (!info->rp_info || !info->rp_n || !info->ep_info || !info->ep_n || 
         !info->ng_info || !info->ng_n) {
         fprintf(stderr, "ERROR: Some pointers are null after allocation!\n");
-        fprintf(stderr, "rp_info: %p, rp_n: %p\n", info->rp_info, info->rp_n);
-        fprintf(stderr, "ep_info: %p, ep_n: %p\n", info->ep_info, info->ep_n);
-        fprintf(stderr, "ng_info: %p, ng_n: %p\n", info->ng_info, info->ng_n);
+        fprintf(stderr, "rp_info: %p, rp_n: %p\n", (void*)info->rp_info, (void*)info->rp_n);
+        fprintf(stderr, "ep_info: %p, ep_n: %p\n", (void*)info->ep_info, (void*)info->ep_n);
+        fprintf(stderr, "ng_info: %p, ng_n: %p\n", (void*)info->ng_info, (void*)info->ng_n);
+        fflush(stderr);
         exit(1);
     }
     
-    return (int64_t)info;
+    int64_t result = (int64_t)info;
+    fprintf(stderr, "DEBUG: preprocessing_cuda returning %lld (0x%llx)\n", 
+            (long long)result, (unsigned long long)result);
+    fflush(stderr);
+    return result;
 }
 

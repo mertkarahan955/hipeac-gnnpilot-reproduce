@@ -53,6 +53,7 @@ def generate_code(code_name, fop_list, f, kid):
 def generate_code_head(f):
     f.write("#include <torch/extension.h>\n" \
     "#include <cub/cub.cuh>\n" \
+    "#include <cstdio>\n" \
     "#include \"preprocessing.h\"\n" \
     "#define WARP_SIZE 32\n" \
     "#define N_BLOCK_SIZE 128\n" \
@@ -71,9 +72,17 @@ def generate_code_head(f):
     "#define kg_min(a, b) ((a)<(b)? (a): (b))\n\n"
     "extern int64_t preprocessing_cuda(int m, int nnz, int *RowPtr, int *ColIdx, bool long_dynamic);\n"
     "int64_t preprocessing(torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t long_dynamic) {\n"
+    "fprintf(stderr, \"DEBUG preprocessing (wrapper): RowPtr.size(0)=%ld, ColIdx.size(0)=%ld\\n\", \n"
+    "        RowPtr.size(0), ColIdx.size(0));\n"
+    "fflush(stderr);\n"
     "int m = RowPtr.size(0) - 1;\n"
     "int nnz = ColIdx.size(0);\n"
-    "return preprocessing_cuda(m, nnz, RowPtr.data_ptr<int>(), ColIdx.data_ptr<int>(), long_dynamic);\n"
+    "fprintf(stderr, \"DEBUG preprocessing (wrapper): m=%d, nnz=%d, calling preprocessing_cuda...\\n\", m, nnz);\n"
+    "fflush(stderr);\n"
+    "int64_t result = preprocessing_cuda(m, nnz, RowPtr.data_ptr<int>(), ColIdx.data_ptr<int>(), long_dynamic);\n"
+    "fprintf(stderr, \"DEBUG preprocessing (wrapper): preprocessing_cuda returned %lld\\n\", (long long)result);\n"
+    "fflush(stderr);\n"
+    "return result;\n"
     "}\n\n"
     "__device__ static float atomicMax_float(float* addr, float val) {\n" \
     "int* addr_as_int = (int*)addr;\n" \

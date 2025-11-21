@@ -120,8 +120,19 @@ h = torch.zeros(nnz, 1).to(device)
 ho = torch.zeros(nnz, 1).to(device)
 
 perf_time_start("preprocessing")
-info = torch.ops.gatlib.preprocessing(rowptr, indices, 1)
+print("DEBUG: About to call preprocessing...")
+print("DEBUG: rowptr shape:", rowptr.shape, "dtype:", rowptr.dtype)
+print("DEBUG: indices shape:", indices.shape, "dtype:", indices.dtype)
+try:
+    info = torch.ops.gatlib.preprocessing(rowptr, indices, 1)
+    print("DEBUG: preprocessing returned, info =", info, "type =", type(info))
+except Exception as e:
+    print("DEBUG: Exception in preprocessing:", e)
+    import traceback
+    traceback.print_exc()
+    raise
 perf_time_end()
+print("DEBUG: After preprocessing, before warmup")
 
 perf_time_start("warmup")
 # torch.ops.gatlib.gat_kernel_0(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
@@ -136,6 +147,7 @@ if (fullcsv_name):
 
 best_layer_time = -1
 best_i = -1
+print("DEBUG: About to start kernel loop, info =", info)
 for i in range(32):
     # em2 = torch.zeros(m, 1).to(device)
     # ho2 = torch.zeros(nnz, 1).to(device)
@@ -144,8 +156,15 @@ for i in range(32):
     # fo2 = torch.zeros(m, fd).to(device)
 
     func_name = "torch.ops.gatlib.gat_kernel_{:d}(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)".format(i)
-
-    eval(func_name)
+    print("DEBUG: About to call kernel", i, "func_name =", func_name)
+    try:
+        eval(func_name)
+        print("DEBUG: Kernel", i, "completed successfully")
+    except Exception as e:
+        print("DEBUG: Exception in kernel", i, ":", e)
+        import traceback
+        traceback.print_exc()
+        raise
 
     h.zero_()
     fo.zero_()
