@@ -1,0 +1,14 @@
+-- Build files have been written to: /home/mertkarahan/GNNPilot-main/build
+Scanning dependencies of target gat
+[ 66%] Building CUDA object CMakeFiles/gat.dir/gat.cu.o
+[ 66%] Building CUDA object CMakeFiles/gat.dir/preprocessing_src/preprocessing.cu.o
+[100%] Linking CUDA shared library libgat.so
+[100%] Built target gat
+Traceback (most recent call last):
+  File "/home/mertkarahan/GNNPilot-main/test/test_kernel.py", line 7, in <module>
+    torch.ops.load_library("../build/libgat.so")
+  File "/home/mertkarahan/miniforge/envs/gnnpilot_fresh/lib/python3.9/site-packages/torch/_ops.py", line 110, in load_library
+    ctypes.CDLL(path)
+  File "/home/mertkarahan/miniforge/envs/gnnpilot_fresh/lib/python3.9/ctypes/__init__.py", line 374, in __init__
+    self._handle = _dlopen(self._name, mode)
+OSError: /home/mertkarahan/GNNPilot-main/build/libgat.so: undefined symbol: __cudaRegisterLinkedBinary_48_tmpxft_0000d862_00000000_7_preprocessing_cpp1_ii_49a71ecf
