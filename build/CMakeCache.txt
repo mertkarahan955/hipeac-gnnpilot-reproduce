@@ -421,6 +421,9 @@ MKL_INTERFACE_FULL:STRING=intel_ilp64
 //Choose MKL_LINK options are: static;dynamic;sdl
 MKL_LINK:STRING=dynamic
 
+//Path to a library.
+MKL_RT:FILEPATH=/home/mertkarahan/miniforge/envs/gnnpilot_fresh/lib/libmkl_rt.so
+
 //Choose MKL_THREADING options are: sequential;intel_thread;tbb_thread;gnu_thread
 MKL_THREADING:STRING=intel_thread
 
