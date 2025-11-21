@@ -25,13 +25,20 @@ void partition_row_panels(int m, int nnz, int *RowPtr, int wsize,
     int last_start_row = 0;
     int last_end_row = -1;
     int last_start_col, last_end_col;
+    fprintf(stderr, "DEBUG partition_row_panels: Starting partitioning with m=%d, nnz=%d, wsize=%d\n", m, nnz, wsize);
+    fflush(stderr);
 
     for (int row = 0; row < m; row++) {
         int row_st = RowPtr[row];
         int row_ed = RowPtr[row + 1];
+        fprintf(stderr, "DEBUG partition_row_panels: row=%d, row_st=%d, row_ed=%d\n", row, row_st, row_ed);
+        fflush(stderr);
 
         if (row_ed - row_st + alpha > wsize - group_n || last_end_row == -1) {
             if (last_end_row != -1) {
+                fprintf(stderr, "DEBUG partition_row_panels: Creating panel from (%d, %d) to (%d, %d)\n", 
+                        last_start_row, last_start_col, last_end_row, last_end_col);
+                fflush(stderr);
                 row_panel tmp(last_start_row, last_end_row, last_start_col, last_end_col);
                 host_rp.push_back(tmp);
                 group_n = 0;
@@ -52,7 +59,9 @@ void partition_row_panels(int m, int nnz, int *RowPtr, int wsize,
         last_end_row = row + 1;
         last_end_col = row_ed;
     }
-
+    fprintf(stderr, "DEBUG partition_row_panels: Created final panel from (%d, %d) to (%d, %d)\n", 
+            last_start_row, last_start_col, last_end_row, last_end_col);
+    fflush(stderr);
     if (last_end_row != -1) {
         row_panel tmp(last_start_row, last_end_row, last_start_col, last_end_col);
         host_rp.push_back(tmp);
@@ -98,8 +107,11 @@ int64_t preprocessing_cuda(int m, int nnz, int *RowPtr, int *ColIdx, bool long_d
     int wsize = 32;  // Warp size
     
     // Partition for row panels (hetero+ kernels)
+    fprintf(stderr, "DEBUG 1: Partitioning row panels...\n");
     std::vector<row_panel> host_rp;
+    fprintf(stderr, "DEBUG 2: Calling partition_row_panels...\n");
     partition_row_panels(m, nnz, RowPtr, wsize, host_rp);
+    fprintf(stderr, "DEBUG 3: Returned from partition_row_panels...\n");
     info->rp_n_host = host_rp.size();
     
     // Always allocate, even if empty (kernel expects valid pointers)
