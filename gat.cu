@@ -97,6 +97,12 @@ fo[row_tmp * featlen + k_tmp] = res_tmp;
 }
 void gat_kernel_0(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_0");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_0");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -160,6 +166,12 @@ fo[row_tmp * featlen + k_tmp] = res_tmp;
 }
 void gat_kernel_1(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_1");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_1");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -294,6 +306,12 @@ if (threadIdx.x == 0) k2_fop0_dp4<<<dynamic_blocks, DP_BLOCK_SIZE>>>(RowPtr, Col
 }
 void gat_kernel_2(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_2");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_2");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -402,6 +420,12 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_3(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_3");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_3");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -503,6 +527,12 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_4(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_4");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_4");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -656,6 +686,12 @@ if (threadIdx.x == 0) k5_fop0_dp4<<<dynamic_blocks, DP_BLOCK_SIZE>>>(RowPtr, Col
 }
 void gat_kernel_5(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_5");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_5");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -732,6 +768,12 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_6(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_6");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_6");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -801,6 +843,12 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_7(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_7");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_7");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -906,6 +954,12 @@ fo[row_tmp * featlen + k_tmp] = res_tmp;
 }
 void gat_kernel_8(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_8");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_8");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -1045,6 +1099,12 @@ fo[row_tmp * featlen + k_tmp] = res_tmp;
 }
 void gat_kernel_9(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_9");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_9");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -1185,6 +1245,12 @@ if (threadIdx.x == 0) k10_fop0_dp4<<<dynamic_blocks, DP_BLOCK_SIZE>>>(RowPtr, Co
 }
 void gat_kernel_10(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_10");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_10");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -1327,6 +1393,12 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_11(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_11");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_11");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -1504,6 +1576,12 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_12(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_12");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_12");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -1659,6 +1737,12 @@ if (threadIdx.x == 0) k13_fop0_dp4<<<dynamic_blocks, DP_BLOCK_SIZE>>>(RowPtr, Co
 }
 void gat_kernel_13(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_13");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_13");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -1769,6 +1853,12 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_14(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_14");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_14");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -1914,6 +2004,12 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_15(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_15");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_15");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -2049,6 +2145,12 @@ fo[row_tmp * featlen + k_tmp] = res_tmp;
 }
 void gat_kernel_16(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_16");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_16");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -2198,6 +2300,12 @@ fo[row_tmp * featlen + k_tmp] = res_tmp;
 }
 void gat_kernel_17(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_17");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_17");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -2348,6 +2456,12 @@ if (threadIdx.x == 0) k18_fop0_dp4<<<dynamic_blocks, DP_BLOCK_SIZE>>>(RowPtr, Co
 }
 void gat_kernel_18(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_18");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_18");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -2520,6 +2634,12 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_19(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_19");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_19");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -2707,6 +2827,12 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_20(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_20");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_20");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -2872,6 +2998,12 @@ if (threadIdx.x == 0) k21_fop0_dp4<<<dynamic_blocks, DP_BLOCK_SIZE>>>(RowPtr, Co
 }
 void gat_kernel_21(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_21");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_21");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -3012,6 +3144,12 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_22(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_22");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_22");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -3167,6 +3305,12 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_23(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_23");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_23");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -3336,6 +3480,12 @@ fo[row_tmp * featlen + k_tmp] = res_tmp;
 }
 void gat_kernel_24(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_24");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_24");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -3485,6 +3635,12 @@ fo[row_tmp * featlen + k_tmp] = res_tmp;
 }
 void gat_kernel_25(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_25");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_25");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -3637,6 +3793,12 @@ if (threadIdx.x == 0) k26_fop0_dp4<<<dynamic_blocks, DP_BLOCK_SIZE>>>(RowPtr, Co
 }
 void gat_kernel_26(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_26");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_26");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -3843,6 +4005,12 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_27(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_27");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_27");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -4030,6 +4198,12 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_28(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_28");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_28");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -4195,6 +4369,12 @@ if (threadIdx.x == 0) k29_fop0_dp4<<<dynamic_blocks, DP_BLOCK_SIZE>>>(RowPtr, Co
 }
 void gat_kernel_29(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_29");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_29");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -4369,6 +4549,12 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_30(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_30");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_30");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -4524,6 +4710,12 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_31(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+if (info_ == nullptr) {
+  throw std::runtime_error("info_ is null in gat_kernel_31");
+}
+if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_31");
+}
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;

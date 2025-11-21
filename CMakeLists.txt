@@ -41,7 +41,10 @@ endif()
 if(NOT DEFINED CUDA_ARCH)
   set(CUDA_ARCH "86")
 endif()
-set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -w -rdc=true -gencode=arch=compute_${CUDA_ARCH},code=sm_${CUDA_ARCH} -lcudadevrt")
+# Enable CUDA separable compilation for device linking
+set(CMAKE_CUDA_SEPARABLE_COMPILATION ON)
+set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -w -rdc=true -gencode=arch=compute_${CUDA_ARCH},code=sm_${CUDA_ARCH}")
+set(CMAKE_CUDA_LINK_FLAGS "${CMAKE_CUDA_LINK_FLAGS} -lcudadevrt")
 
 set(SRC_DIR ${PROJECT_SOURCE_DIR})
 set(PREPROCESSING_DIR ${SRC_DIR}/preprocessing_src)
@@ -76,4 +79,6 @@ target_link_libraries(gat PRIVATE
 set_target_properties(gat PROPERTIES
   CXX_STANDARD 14
   POSITION_INDEPENDENT_CODE ON
+  CUDA_SEPARABLE_COMPILATION ON
+  CUDA_RESOLVE_DEVICE_SYMBOLS ON
 )
