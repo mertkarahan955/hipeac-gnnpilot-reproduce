@@ -5,7 +5,6 @@ fi
 
 input_matrix=$1
 
-# Dosyanın tam yolunu al
 if [ -f "$input_matrix" ]; then
     full_path=$(realpath "$input_matrix")
 elif [ -f "$(pwd)/$input_matrix" ]; then

@@ -46,18 +46,15 @@ set(CMAKE_CUDA_SEPARABLE_COMPILATION ON)
 set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -w -rdc=true -gencode=arch=compute_${CUDA_ARCH},code=sm_${CUDA_ARCH}")
 set(CMAKE_CUDA_LINK_FLAGS "${CMAKE_CUDA_LINK_FLAGS} -lcudadevrt")
 
+include_directories(preprocessing_src)
 set(SRC_DIR ${PROJECT_SOURCE_DIR})
-set(PREPROCESSING_DIR ${SRC_DIR}/preprocessing_src)
-include_directories(${PREPROCESSING_DIR})
-include_directories(${Python3_INCLUDE_DIRS})
-
 set(SRC_FILE ${SRC_DIR}/gat.cu
-${PREPROCESSING_DIR}/preprocessing.cu)
+${SRC_DIR}/preprocessing_src/preprocessing.cu)
+include_directories(${Python3_INCLUDE_DIRS})
 
 add_library(gat SHARED ${SRC_FILE})
 
 target_include_directories(gat PRIVATE
-  ${PREPROCESSING_DIR}
   ${Python3_INCLUDE_DIRS}
   $<$<BOOL:${TORCH_INCLUDE_DIRS}>:${TORCH_INCLUDE_DIRS}>
 )

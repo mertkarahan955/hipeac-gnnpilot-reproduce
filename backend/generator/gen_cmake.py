@@ -41,15 +41,13 @@ def generate_cmake(name, f):
     "set(CMAKE_CUDA_SEPARABLE_COMPILATION ON)\n" \
     "set(CMAKE_CUDA_FLAGS \"${{CMAKE_CUDA_FLAGS}} -w -rdc=true -gencode=arch=compute_${{CUDA_ARCH}},code=sm_${{CUDA_ARCH}}\")\n" \
     "set(CMAKE_CUDA_LINK_FLAGS \"${{CMAKE_CUDA_LINK_FLAGS}} -lcudadevrt\")\n\n" \
+    "include_directories(preprocessing_src)\n"
     "set(SRC_DIR ${{PROJECT_SOURCE_DIR}})\n" \
-    "set(PREPROCESSING_DIR ${{SRC_DIR}}/preprocessing_src)\n" \
-    "include_directories(${{PREPROCESSING_DIR}})\n" \
-    "include_directories(${{Python3_INCLUDE_DIRS}})\n\n" \
     "set(SRC_FILE ${{SRC_DIR}}/{}.cu\n" \
-    "${{PREPROCESSING_DIR}}/preprocessing.cu)\n\n" \
+    "${{SRC_DIR}}/preprocessing_src/preprocessing.cu)\n" \
+    "include_directories(${{Python3_INCLUDE_DIRS}})\n\n" \
     "add_library({} SHARED ${{SRC_FILE}})\n\n" \
     "target_include_directories({} PRIVATE\n" \
-    "  ${{PREPROCESSING_DIR}}\n" \
     "  ${{Python3_INCLUDE_DIRS}}\n" \
     "  $<$<BOOL:${{TORCH_INCLUDE_DIRS}}>:${{TORCH_INCLUDE_DIRS}}>\n" \
     ")\n\n" \

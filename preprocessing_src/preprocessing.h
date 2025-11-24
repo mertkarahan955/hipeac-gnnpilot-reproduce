@@ -1,59 +1,46 @@
-#ifndef PREPROCESSING_H__
-#define PREPROCESSING_H__
+#pragma once
 
-#include <cuda_runtime.h>
-#include <vector>
+#define SINGLE_PCK_THRESH 8192
+#define DP_BLOCK_SIZE 128
+#define DP_NNZ_PER_BLOCK SINGLE_PCK_THRESH
+#define DP_NNZ_PER_WARP (SINGLE_PCK_THRESH * WARP_SIZE / DP_BLOCK_SIZE)
+#define LONG_BLOCK_NNZ (SINGLE_PCK_THRESH)
+#define NG_SIZE 32
 
-#define WARP_SIZE 32
-#define BLOCK_NUM 160
-#define WARP_PER_BLOCK 4
-#define NG_SIZE 32  // Neighbor group size
-
-// Row panel structure - similar to warp_info
-typedef struct row_panel_ {
+typedef struct row_panel_
+{
     int row_st;
     int row_ed;
-    int col_st;
-    int col_ed;
-    
-    __host__ __device__ row_panel_() : row_st(0), row_ed(0), col_st(-1), col_ed(-1) {}
-    __host__ __device__ row_panel_(int rs, int re, int cs, int ce) 
-        : row_st(rs), row_ed(re), col_st(cs), col_ed(ce) {}
+    int col_st = -1;
+    int col_ed = -1;
+
+    row_panel_() {}
+    __host__ __device__ row_panel_(int row_st_in, int row_ed_in): row_st(row_st_in), row_ed(row_ed_in) {}
+    __host__ __device__ row_panel_(int row_st_in, int row_ed_in, int col_st_in, int col_ed_in): 
+    row_st(row_st_in), row_ed(row_ed_in), col_st(col_st_in), col_ed(col_ed_in) {}
 } row_panel;
 
-// Neighbor group structure for ngd parallelization
-typedef struct neighbor_group_ {
+typedef struct neighbor_group_
+{
     int row_st;
-    int col_st;
-    
-    __host__ __device__ neighbor_group_() : row_st(0), col_st(0) {}
-    __host__ __device__ neighbor_group_(int rs, int cs) : row_st(rs), col_st(cs) {}
+    int col_st = -1;
+    neighbor_group_() {}
+    __host__ __device__ neighbor_group_(int row_st_in, int col_st_in): row_st(row_st_in), col_st(col_st_in) {}
 } neighbor_group;
 
-// Main info structure that holds all preprocessing data
-typedef struct kg_info_ {
-    // Row panel info (for hetero+ kernels)
-    row_panel* rp_info;
-    int* rp_n;
+typedef struct kg_info_
+{
+    row_panel *rp_info;
+    int *rp_n;
     int rp_n_host;
-    
-    // Edge panel info (for edge-parallel kernels)
-    row_panel* ep_info;
-    int* ep_n;
+
+    row_panel *ep_info;
+    int *ep_n;
     int ep_n_host;
-    
-    // Neighbor group info (for ngd kernels)
-    neighbor_group* ng_info;
-    int* ng_n;
+
+    neighbor_group *ng_info;
+    int *ng_n;
     int ng_n_host;
     
-    kg_info_() : rp_info(nullptr), rp_n(nullptr), rp_n_host(0),
-                 ep_info(nullptr), ep_n(nullptr), ep_n_host(0),
-                 ng_info(nullptr), ng_n(nullptr), ng_n_host(0) {}
+    kg_info_() { rp_info = NULL; rp_n = NULL; ng_info = NULL; ng_n = NULL;}
 } kg_info;
-
-// CUDA function declaration
-int64_t preprocessing_cuda(int m, int nnz, int *RowPtr, int *ColIdx, bool long_dynamic);
-
-#endif
-

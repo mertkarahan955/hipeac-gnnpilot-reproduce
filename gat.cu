@@ -1,5 +1,6 @@
 #include <torch/extension.h>
 #include <cub/cub.cuh>
+#include <cstdio>
 #include "preprocessing.h"
 #define WARP_SIZE 32
 #define N_BLOCK_SIZE 128
@@ -105,12 +106,25 @@ fo[row_tmp * featlen + k_tmp] = res_tmp;
 }
 void gat_kernel_0(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_0: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_0\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_0");
 }
+fprintf(stderr, "DEBUG gat_kernel_0: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_0\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_0");
 }
+fprintf(stderr, "DEBUG gat_kernel_0: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -174,12 +188,25 @@ fo[row_tmp * featlen + k_tmp] = res_tmp;
 }
 void gat_kernel_1(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_1: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_1\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_1");
 }
+fprintf(stderr, "DEBUG gat_kernel_1: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_1\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_1");
 }
+fprintf(stderr, "DEBUG gat_kernel_1: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -314,12 +341,25 @@ if (threadIdx.x == 0) k2_fop0_dp4<<<dynamic_blocks, DP_BLOCK_SIZE>>>(RowPtr, Col
 }
 void gat_kernel_2(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_2: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_2\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_2");
 }
+fprintf(stderr, "DEBUG gat_kernel_2: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_2\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_2");
 }
+fprintf(stderr, "DEBUG gat_kernel_2: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -428,12 +468,25 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_3(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_3: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_3\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_3");
 }
+fprintf(stderr, "DEBUG gat_kernel_3: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_3\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_3");
 }
+fprintf(stderr, "DEBUG gat_kernel_3: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -535,12 +588,25 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_4(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_4: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_4\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_4");
 }
+fprintf(stderr, "DEBUG gat_kernel_4: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_4\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_4");
 }
+fprintf(stderr, "DEBUG gat_kernel_4: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -694,12 +760,25 @@ if (threadIdx.x == 0) k5_fop0_dp4<<<dynamic_blocks, DP_BLOCK_SIZE>>>(RowPtr, Col
 }
 void gat_kernel_5(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_5: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_5\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_5");
 }
+fprintf(stderr, "DEBUG gat_kernel_5: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_5\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_5");
 }
+fprintf(stderr, "DEBUG gat_kernel_5: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -776,12 +855,25 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_6(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_6: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_6\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_6");
 }
+fprintf(stderr, "DEBUG gat_kernel_6: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_6\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_6");
 }
+fprintf(stderr, "DEBUG gat_kernel_6: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -851,12 +943,25 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_7(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_7: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_7\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_7");
 }
+fprintf(stderr, "DEBUG gat_kernel_7: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_7\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_7");
 }
+fprintf(stderr, "DEBUG gat_kernel_7: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -962,12 +1067,25 @@ fo[row_tmp * featlen + k_tmp] = res_tmp;
 }
 void gat_kernel_8(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_8: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_8\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_8");
 }
+fprintf(stderr, "DEBUG gat_kernel_8: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_8\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_8");
 }
+fprintf(stderr, "DEBUG gat_kernel_8: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -1107,12 +1225,25 @@ fo[row_tmp * featlen + k_tmp] = res_tmp;
 }
 void gat_kernel_9(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_9: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_9\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_9");
 }
+fprintf(stderr, "DEBUG gat_kernel_9: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_9\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_9");
 }
+fprintf(stderr, "DEBUG gat_kernel_9: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -1253,12 +1384,25 @@ if (threadIdx.x == 0) k10_fop0_dp4<<<dynamic_blocks, DP_BLOCK_SIZE>>>(RowPtr, Co
 }
 void gat_kernel_10(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_10: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_10\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_10");
 }
+fprintf(stderr, "DEBUG gat_kernel_10: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_10\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_10");
 }
+fprintf(stderr, "DEBUG gat_kernel_10: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -1401,12 +1545,25 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_11(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_11: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_11\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_11");
 }
+fprintf(stderr, "DEBUG gat_kernel_11: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_11\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_11");
 }
+fprintf(stderr, "DEBUG gat_kernel_11: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -1584,12 +1741,25 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_12(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_12: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_12\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_12");
 }
+fprintf(stderr, "DEBUG gat_kernel_12: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_12\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_12");
 }
+fprintf(stderr, "DEBUG gat_kernel_12: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -1745,12 +1915,25 @@ if (threadIdx.x == 0) k13_fop0_dp4<<<dynamic_blocks, DP_BLOCK_SIZE>>>(RowPtr, Co
 }
 void gat_kernel_13(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_13: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_13\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_13");
 }
+fprintf(stderr, "DEBUG gat_kernel_13: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_13\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_13");
 }
+fprintf(stderr, "DEBUG gat_kernel_13: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -1861,12 +2044,25 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_14(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_14: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_14\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_14");
 }
+fprintf(stderr, "DEBUG gat_kernel_14: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_14\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_14");
 }
+fprintf(stderr, "DEBUG gat_kernel_14: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -2012,12 +2208,25 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_15(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_15: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_15\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_15");
 }
+fprintf(stderr, "DEBUG gat_kernel_15: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_15\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_15");
 }
+fprintf(stderr, "DEBUG gat_kernel_15: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -2153,12 +2362,25 @@ fo[row_tmp * featlen + k_tmp] = res_tmp;
 }
 void gat_kernel_16(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_16: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_16\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_16");
 }
+fprintf(stderr, "DEBUG gat_kernel_16: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_16\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_16");
 }
+fprintf(stderr, "DEBUG gat_kernel_16: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -2308,12 +2530,25 @@ fo[row_tmp * featlen + k_tmp] = res_tmp;
 }
 void gat_kernel_17(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_17: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_17\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_17");
 }
+fprintf(stderr, "DEBUG gat_kernel_17: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_17\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_17");
 }
+fprintf(stderr, "DEBUG gat_kernel_17: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -2464,12 +2699,25 @@ if (threadIdx.x == 0) k18_fop0_dp4<<<dynamic_blocks, DP_BLOCK_SIZE>>>(RowPtr, Co
 }
 void gat_kernel_18(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_18: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_18\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_18");
 }
+fprintf(stderr, "DEBUG gat_kernel_18: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_18\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_18");
 }
+fprintf(stderr, "DEBUG gat_kernel_18: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -2642,12 +2890,25 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_19(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_19: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_19\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_19");
 }
+fprintf(stderr, "DEBUG gat_kernel_19: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_19\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_19");
 }
+fprintf(stderr, "DEBUG gat_kernel_19: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -2835,12 +3096,25 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_20(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_20: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_20\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_20");
 }
+fprintf(stderr, "DEBUG gat_kernel_20: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_20\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_20");
 }
+fprintf(stderr, "DEBUG gat_kernel_20: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -3006,12 +3280,25 @@ if (threadIdx.x == 0) k21_fop0_dp4<<<dynamic_blocks, DP_BLOCK_SIZE>>>(RowPtr, Co
 }
 void gat_kernel_21(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_21: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_21\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_21");
 }
+fprintf(stderr, "DEBUG gat_kernel_21: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_21\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_21");
 }
+fprintf(stderr, "DEBUG gat_kernel_21: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -3152,12 +3439,25 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_22(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_22: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_22\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_22");
 }
+fprintf(stderr, "DEBUG gat_kernel_22: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_22\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_22");
 }
+fprintf(stderr, "DEBUG gat_kernel_22: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -3313,12 +3613,25 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_23(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_23: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_23\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_23");
 }
+fprintf(stderr, "DEBUG gat_kernel_23: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_23\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_23");
 }
+fprintf(stderr, "DEBUG gat_kernel_23: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -3488,12 +3801,25 @@ fo[row_tmp * featlen + k_tmp] = res_tmp;
 }
 void gat_kernel_24(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_24: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_24\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_24");
 }
+fprintf(stderr, "DEBUG gat_kernel_24: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_24\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_24");
 }
+fprintf(stderr, "DEBUG gat_kernel_24: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -3643,12 +3969,25 @@ fo[row_tmp * featlen + k_tmp] = res_tmp;
 }
 void gat_kernel_25(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_25: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_25\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_25");
 }
+fprintf(stderr, "DEBUG gat_kernel_25: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_25\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_25");
 }
+fprintf(stderr, "DEBUG gat_kernel_25: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -3801,12 +4140,25 @@ if (threadIdx.x == 0) k26_fop0_dp4<<<dynamic_blocks, DP_BLOCK_SIZE>>>(RowPtr, Co
 }
 void gat_kernel_26(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_26: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_26\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_26");
 }
+fprintf(stderr, "DEBUG gat_kernel_26: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_26\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_26");
 }
+fprintf(stderr, "DEBUG gat_kernel_26: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -4013,12 +4365,25 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_27(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_27: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_27\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_27");
 }
+fprintf(stderr, "DEBUG gat_kernel_27: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_27\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_27");
 }
+fprintf(stderr, "DEBUG gat_kernel_27: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -4206,12 +4571,25 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_28(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_28: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_28\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_28");
 }
+fprintf(stderr, "DEBUG gat_kernel_28: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_28\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_28");
 }
+fprintf(stderr, "DEBUG gat_kernel_28: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -4377,12 +4755,25 @@ if (threadIdx.x == 0) k29_fop0_dp4<<<dynamic_blocks, DP_BLOCK_SIZE>>>(RowPtr, Co
 }
 void gat_kernel_29(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_29: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_29\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_29");
 }
+fprintf(stderr, "DEBUG gat_kernel_29: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_29\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_29");
 }
+fprintf(stderr, "DEBUG gat_kernel_29: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -4557,12 +4948,25 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_30(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_30: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_30\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_30");
 }
+fprintf(stderr, "DEBUG gat_kernel_30: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_30\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_30");
 }
+fprintf(stderr, "DEBUG gat_kernel_30: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;
@@ -4718,12 +5122,25 @@ atomicAdd(&fo[row_tmp * featlen + k_tmp], res_tmp);
 }
 void gat_kernel_31(int64_t info_addr, torch::Tensor RowPtr, torch::Tensor ColIdx, int64_t featlen, torch::Tensor f, torch::Tensor fo, torch::Tensor we, torch::Tensor lr, torch::Tensor e, torch::Tensor em, torch::Tensor es, torch::Tensor h, torch::Tensor ho) {
 kg_info* info_ = (kg_info*)info_addr;
+fprintf(stderr, "DEBUG gat_kernel_31: info_addr=%lld, info_=%p\n", (long long)info_addr, (void*)info_);
+fflush(stderr);
 if (info_ == nullptr) {
+  fprintf(stderr, "ERROR: info_ is null in gat_kernel_31\n");
+  fflush(stderr);
   throw std::runtime_error("info_ is null in gat_kernel_31");
 }
+fprintf(stderr, "DEBUG gat_kernel_31: Checking pointers...\n");
+fprintf(stderr, "  rp_info=%p, rp_n=%p\n", (void*)info_->rp_info, (void*)info_->rp_n);
+fprintf(stderr, "  ep_info=%p, ep_n=%p\n", (void*)info_->ep_info, (void*)info_->ep_n);
+fprintf(stderr, "  ng_info=%p, ng_n=%p\n", (void*)info_->ng_info, (void*)info_->ng_n);
+fflush(stderr);
 if (info_->rp_info == nullptr || info_->rp_n == nullptr || info_->ep_info == nullptr || info_->ep_n == nullptr || info_->ng_info == nullptr || info_->ng_n == nullptr) {
+  fprintf(stderr, "ERROR: Some preprocessing pointers are null in gat_kernel_31\n");
+  fflush(stderr);
   throw std::runtime_error("Some preprocessing pointers are null in gat_kernel_31");
 }
+fprintf(stderr, "DEBUG gat_kernel_31: All pointers valid, proceeding...\n");
+fflush(stderr);
 int numnodes = RowPtr.size(0) - 1;
 int numedges = ColIdx.size(0);
 int num_n_block = (numnodes + N_BLOCK_SIZE - 1) / N_BLOCK_SIZE;

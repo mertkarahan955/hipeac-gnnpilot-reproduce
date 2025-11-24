@@ -1,3 +1,4 @@
+# mainly tests spmm effectiveness of the pckgnn paper
 import dgl
 import torch
 import torch.nn.functional as F
@@ -48,6 +49,7 @@ else:
     exit
 
 # test setup
+# if encounter any memory problem, reduce these parameters (power of 2) (for both)
 gcn_hidden = 64
 out_dim = 32
 # out_dim = int((out_dim + 31) / 32) * 32
@@ -166,8 +168,8 @@ for i in range(32):
         traceback.print_exc()
         raise
 
-    h.zero_()
-    fo.zero_()
+    #h.zero_()
+    #fo.zero_()
 
     perf_time_start("test_kernel{:d}".format(i))
     eval(func_name)
