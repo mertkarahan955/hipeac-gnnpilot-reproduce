@@ -6,8 +6,8 @@ import torch.nn.functional as F
 
 import torch
 # import KGGNN
-#torch.ops.load_library("../KG_GNN/build/libKGGNN.so")
-torch.ops.load_library("../../KG_GNN/build/libKGGNN.so")
+torch.ops.load_library("../KG_GNN/build/libKGGNN.so")
+#torch.ops.load_library("../../KG_GNN/build/libKGGNN.so")
 print(torch.ops.KGGNN)
 
 import utils

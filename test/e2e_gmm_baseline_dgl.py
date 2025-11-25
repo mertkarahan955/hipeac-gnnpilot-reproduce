@@ -50,7 +50,7 @@ elif ('.csr' in dataset_dir):
 else:
     exit
 
-reorder = True
+reorder = False
 
 # Transform to CSR format
 if ('.pt' in dataset_dir):

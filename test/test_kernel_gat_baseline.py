@@ -9,7 +9,7 @@ torch.ops.load_library("../build/libgat.so")
 from utils import *
 import sys
 sys.path.append('lib')
-from ugcg_test import *
+#from ugcg_test import *
 from kg_test import *
 
 import time
@@ -82,7 +82,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 # input_feature = input_feature.to(device)
 perf_time_init(dataset_dir)
 
-reorder = True
+reorder = False
 
 # Transform to CSR format
 if ('.pt' in dataset_dir):
