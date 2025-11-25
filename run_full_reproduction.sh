@@ -39,7 +39,13 @@ echo "Running DSL kernel tests..."
 if [ -f "build/libgat.so" ]; then
     cd test
     echo "Testing all 32 kernel variants..."
-    python test_kernel.py "$DATASET" "../$OUTPUT_DIR/kernel_results.csv" "../$OUTPUT_DIR/kernel_full_results.csv"
+    # Convert dataset path to absolute path if relative
+    if [[ "$DATASET" = /* ]]; then
+        DATASET_PATH="$DATASET"
+    else
+        DATASET_PATH="../$DATASET"
+    fi
+    python test_kernel.py "$DATASET_PATH" "../$OUTPUT_DIR/kernel_results.csv" "../$OUTPUT_DIR/kernel_full_results.csv"
     cd ..
     echo "✓ DSL kernel tests completed"
 else

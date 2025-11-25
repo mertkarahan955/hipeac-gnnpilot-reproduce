@@ -197,13 +197,12 @@ This repository implements cutting-edge GNN optimization techniques and serves a
 
 **Test Commands**:
 ```bash
-# Test neighbor packing strategies with different baselines
+# Test neighbor packing strategies (comment out external baselines)
 cd test
 python test_kernel_gat_baseline.py PCKGNN [dataset.pt/dataset.mtx]
 python test_kernel_gmm_baseline.py PCKGNN [dataset.pt/dataset.mtx]
 
-# Compare with other frameworks
-python test_kernel_gat_baseline.py UGCG [dataset.pt/dataset.mtx] 
+# Note: Comment out 'from ugcg_test import *' in baseline files for internal-only testing
 ```
 
 ### Section 3.3: Bin Packing for Denser Matrices
