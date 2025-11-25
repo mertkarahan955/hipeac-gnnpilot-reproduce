@@ -2,7 +2,7 @@ import torch
 import traceback
 import sys
 
-so = "KG_GNN/build/libKGGNN.so"
+so = "../KG_GNN/build/libKGGNN.so"
 print("Attempting to load:", so)
 try:
     torch.ops.load_library(so)

@@ -33,9 +33,9 @@ def generate_cmake(name, f):
     "  set(MKL_LINK mkl_intel_ilp64 mkl_intel_thread mkl_core)\n" \
     "endif()\n" \
     "# --- end MKL detection ---\n\n" \
-    "# Allow overriding CUDA arch (eg: -DCUDA_ARCH=86)\n" \
+    "# Allow overriding CUDA arch (eg: -DCUDA_ARCH=61)\n" \
     "if(NOT DEFINED CUDA_ARCH)\n" \
-    "  set(CUDA_ARCH \"86\")\n" \
+    "  set(CUDA_ARCH \"61\")\n" \
     "endif()\n" \
     "# Enable CUDA separable compilation for device linking\n" \
     "set(CMAKE_CUDA_SEPARABLE_COMPILATION ON)\n" \

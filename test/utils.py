@@ -4,6 +4,7 @@ import torch
 import similarity as sim
 from perf_time import *
 from math import sqrt
+import rabbit
 
 def csr_similarity2(RowPtr, ColIdx, Vals):
     

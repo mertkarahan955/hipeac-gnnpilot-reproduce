@@ -37,9 +37,9 @@ else()
 endif()
 # --- end MKL detection ---
 
-# Allow overriding CUDA arch (eg: -DCUDA_ARCH=86)
+# Allow overriding CUDA arch (eg: -DCUDA_ARCH=61)
 if(NOT DEFINED CUDA_ARCH)
-  set(CUDA_ARCH "86")
+  set(CUDA_ARCH "61")
 endif()
 # Enable CUDA separable compilation for device linking
 set(CMAKE_CUDA_SEPARABLE_COMPILATION ON)

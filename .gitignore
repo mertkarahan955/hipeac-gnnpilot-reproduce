@@ -1,3 +1,5 @@
 KG_GNN/build/
 backend/generator/__pycache__/
 build/
+datasets/
+test/__pycache__

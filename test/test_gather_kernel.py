@@ -122,7 +122,7 @@ info = torch.ops.gatlib.preprocessing(rowptr, indices, 1)
 perf_time_end()
 
 perf_time_start("warmup")
-torch.ops.gatlib.gat_kernel_0(info, rowptr, indices, f, fo, we, lr, e, em, es, h)
+torch.ops.gatlib.gat_kernel_0(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h)
 perf_time_end()
 
 # print(h, em)
@@ -132,7 +132,7 @@ for i in range(2):
     #em2 = torch.zeros(m, 1).to(device)
     # h2 = torch.zeros(nnz, 1).to(device)
 
-    func_name = "torch.ops.gatlib.gat_kernel_{:d}(info, rowptr, indices, f, fo, we, lr, e, em2, es, h)".format(i)
+    func_name = "torch.ops.gatlib.gat_kernel_{:d}(info, rowptr, indices, fd, f, fo, we, lr, e, em2, es, h)".format(i)
 
     #warmup
     eval(func_name)
