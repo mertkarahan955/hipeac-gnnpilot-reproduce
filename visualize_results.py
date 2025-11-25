@@ -286,6 +286,9 @@ def plot_dataset_scalability(df, save_path="dataset_scalability.png"):
         times = df['execution_time'].values
         
         plt.subplot(2, 2, 1)
+        # Ensure arrays have same length
+        strategies = df['strategy'].values
+        times = df['execution_time'].values
         plt.plot(strategies, times, 'o-', linewidth=2, markersize=8)
         plt.xlabel('Strategy/Kernel ID')
         plt.ylabel('Execution Time (ms)')
