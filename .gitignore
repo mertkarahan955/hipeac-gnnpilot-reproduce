@@ -3,3 +3,4 @@ backend/generator/__pycache__/
 build/
 datasets/
 test/__pycache__/
+test/lib/__pycache__/
