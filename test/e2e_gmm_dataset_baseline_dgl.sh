@@ -10,7 +10,7 @@ matrix_dir=$1
 csv_name=$2
 
 # dataset_list=("ogbn-arxiv.pt" "ogbl-collab.pt" "ogbn-mag.pt" "ogbl-ppa.pt" "ogbn-products.pt" "reddit.pt" "ogbn-proteins.pt")
-dataset_list=("ogbn-arxiv.pt" "ogbl-collab.pt" "ogbn-mag.pt" "ogbl-ppa.pt" "ogbn-products.pt" "ogbl-ddi.pt" "ogbn-proteins.pt"  "reddit.pt" )
+dataset_list=("ogbn-arxiv.pt")
 
 for data in "${dataset_list[@]}"; do    
     dir="$matrix_dir/$data"
