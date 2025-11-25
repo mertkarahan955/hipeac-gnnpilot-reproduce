@@ -57,7 +57,13 @@ echo ""
 echo "Running end-to-end tests..."
 if [ -f "test/e2e_gat.py" ]; then
     cd test
-    python e2e_gat.py "$DATASET" "../$OUTPUT_DIR/e2e_results.csv"
+    # Convert dataset path to absolute path if relative
+    if [[ "$DATASET" = /* ]]; then
+        DATASET_PATH="$DATASET"
+    else
+        DATASET_PATH="../$DATASET"
+    fi
+    python e2e_gat.py "$DATASET_PATH" "../$OUTPUT_DIR/e2e_results.csv"
     cd ..
     echo "✓ End-to-end tests completed"
 else
@@ -70,11 +76,18 @@ echo "Running strategy comparison tests..."
 if [ -f "KG_GNN/build/libKGGNN.so" ]; then
     cd test
     
+    # Convert dataset path to absolute path if relative
+    if [[ "$DATASET" = /* ]]; then
+        DATASET_PATH="$DATASET"
+    else
+        DATASET_PATH="../$DATASET"
+    fi
+    
     echo "Testing neighbor packing strategies..."
-    python test_kernel_gat_baseline.py PCKGNN "$DATASET" "../$OUTPUT_DIR/neighbor_packing_results.csv" 2>/dev/null || echo "⚠ Neighbor packing test failed"
+    python test_kernel_gat_baseline.py PCKGNN "$DATASET_PATH" "../$OUTPUT_DIR/neighbor_packing_results.csv" 2>/dev/null || echo "⚠ Neighbor packing test failed"
     
     echo "Testing with UGCG baseline..."
-    python test_kernel_gat_baseline.py UGCG "$DATASET" "../$OUTPUT_DIR/ugcg_baseline_results.csv" 2>/dev/null || echo "⚠ UGCG baseline test failed"
+    python test_kernel_gat_baseline.py UGCG "$DATASET_PATH" "../$OUTPUT_DIR/ugcg_baseline_results.csv" 2>/dev/null || echo "⚠ UGCG baseline test failed"
     
     cd ..
     echo "✓ Strategy comparison tests completed"
