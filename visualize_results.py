@@ -19,27 +19,46 @@ sns.set_palette("husl")
 def load_csv_results(csv_file):
     """Load CSV results with flexible format detection"""
     try:
-        # Try to detect CSV format automatically
-        df = pd.read_csv(csv_file, header=None)
-        
-        # Common format: dataset,strategy/kernel_id,execution_time
-        if df.shape[1] == 3:
-            df.columns = ['dataset', 'strategy', 'execution_time']
-        # Extended format: dataset,strategy,execution_time,extra_metrics
-        elif df.shape[1] > 3:
-            df.columns = ['dataset', 'strategy', 'execution_time'] + [f'metric_{i}' for i in range(df.shape[1]-3)]
-        
-        # Convert execution time to float
+        # Read CSV and infer header
+        df = pd.read_csv(csv_file)
+
+        # Check if columns look right
+        expected_cols = ['dataset', 'kernel_id', 'execution_time']
+        if list(df.columns) == expected_cols:
+            df.rename(columns={'kernel_id': 'strategy'}, inplace=True)
+        elif 'strategy' not in df.columns and 'kernel_id' not in df.columns:
+            # No header, assume format: dataset,strategy/kernel_id,execution_time
+            df = pd.read_csv(csv_file, header=None)
+            if df.shape[1] == 3:
+                df.columns = ['dataset', 'strategy', 'execution_time']
+            elif df.shape[1] > 3:
+                df.columns = ['dataset', 'strategy', 'execution_time'] + [f'metric_{i}' for i in range(df.shape[1]-3)]
+
+        # Clean and convert data types
+        # Remove header row if it got included as data
+        df = df[df['strategy'] != 'kernel_id']
+        df = df[df['strategy'] != 'strategy']
+
+        # Convert to numeric
+        df['strategy'] = pd.to_numeric(df['strategy'], errors='coerce')
         df['execution_time'] = pd.to_numeric(df['execution_time'], errors='coerce')
-        
+
+        # Drop rows with NaN values (likely header remnants)
+        df = df.dropna(subset=['strategy', 'execution_time'])
+
+        # Convert strategy to int
+        df['strategy'] = df['strategy'].astype(int)
+
         print(f"Loaded {len(df)} results from {csv_file}")
         print(f"Datasets: {df['dataset'].unique()}")
-        print(f"Strategies: {df['strategy'].unique()}")
-        
+        print(f"Strategies: {sorted(df['strategy'].unique())}")
+
         return df
-    
+
     except Exception as e:
         print(f"Error loading {csv_file}: {e}")
+        import traceback
+        traceback.print_exc()
         return None
 
 def plot_kernel_comparison(df, save_path="kernel_comparison.png"):
