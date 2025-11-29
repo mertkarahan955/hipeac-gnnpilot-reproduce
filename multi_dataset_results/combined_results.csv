@@ -1,0 +1,14 @@
+dataset,best_kernel,best_time
+add20,1,0.063791
+bcsstk13,1,0.089842
+bcsstk13,7,0.103802
+ca-GrQc,1,0.121963
+caidaRouterLevel,0,3.549127
+delaunay_n10,1,0.050091
+email-Enron,1,0.617843
+Erdos971,7,0.075162
+polbooks,1,0.063331
+bcsstk13,1,0.089842
+bcsstk13,7,0.103802
+bcsstk13,7,0.091052
+ogbn-arxiv,15,3.381745

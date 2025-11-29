@@ -1,0 +1,26 @@
+GNNPilot Reproduction Results - Performance Report
+==================================================
+
+Total experiments: 726
+Datasets tested: ['add20', 'bcsstk13', 'ca-GrQc', 'caidaRouterLevel', 'delaunay_n10', 'email-Enron', 'Erdos971', 'polbooks', 'ogbn-arxiv']
+Strategies/Kernels tested: 32
+
+Overall Performance Statistics:
+  Best execution time: 0.0501 ms
+  Worst execution time: 9.7823 ms
+  Average execution time: 1.7453 ms
+  Optimization speedup: 195.29x
+
+Best Strategy per Dataset:
+  Erdos971: Strategy 7 (0.0674 ms)
+  add20: Strategy 1 (0.0638 ms)
+  bcsstk13: Strategy 1 (0.0898 ms)
+  ca-GrQc: Strategy 7 (0.1204 ms)
+  caidaRouterLevel: Strategy 0 (3.5491 ms)
+  delaunay_n10: Strategy 1 (0.0501 ms)
+  email-Enron: Strategy 1 (0.6178 ms)
+  ogbn-arxiv: Strategy 14 (3.3805 ms)
+  polbooks: Strategy 1 (0.0633 ms)
+
+==================================================
+End of Report

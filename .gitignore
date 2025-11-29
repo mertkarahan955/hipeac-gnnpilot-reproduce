@@ -15,30 +15,6 @@ gen_src/
 *.pyc
 *.pyo
 
-# Test results and outputs
-reproduction_results/
-model_results/
-model_comparison_results/
-test_output/
-results/
-*.csv
-!test/test_csv.csv
-
-# Visualization outputs
-plots/
-*.png
-*.pdf
-*.svg
-
-# Logs
-*.log
-first_output_log.txt
-second_output_log.txt
-third_output.txt
-fourth_output.txt
-fifth_log.txt
-sixth_output.txt
-visualize_output_log.txt
 
 # Temporary files
 *.tmp
@@ -49,6 +25,3 @@ visualize_output_log.txt
 .vscode/
 .idea/
 *.code-workspace
-
-# macOS
-.DS_Store
