@@ -1,18 +1,18 @@
 GNNPilot Reproduction Results - Performance Report
 ==================================================
 
-Total experiments: 96
+Total experiments: 128
 Datasets tested: ['ogbn-arxiv']
 Strategies/Kernels tested: 32
 
 Overall Performance Statistics:
-  Best execution time: 3.5707 ms
+  Best execution time: 3.5275 ms
   Worst execution time: 8.4833 ms
-  Average execution time: 5.0522 ms
-  Optimization speedup: 2.38x
+  Average execution time: 5.0290 ms
+  Optimization speedup: 2.40x
 
 Best Strategy per Dataset:
-  ogbn-arxiv: Strategy 6 (3.5707 ms)
+  ogbn-arxiv: Strategy 15 (3.5275 ms)
 
 ==================================================
 End of Report
