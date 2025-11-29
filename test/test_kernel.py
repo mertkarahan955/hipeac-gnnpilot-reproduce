@@ -1,5 +1,4 @@
 # mainly tests spmm effectiveness of the pckgnn paper
-import dgl
 import torch
 import torch.nn.functional as F
 import torch.nn as nn

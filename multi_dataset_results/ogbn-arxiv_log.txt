@@ -1,0 +1,501 @@
+DEBUG preprocessing (wrapper): RowPtr.size(0)=169344, ColIdx.size(0)=1335586
+DEBUG preprocessing (wrapper): m=169343, nnz=1335586, calling preprocessing_cuda...
+long row nnz: 34929
+DEBUG preprocessing (wrapper): preprocessing_cuda returned 94412594928288
+DEBUG gat_kernel_0: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_0: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_0: All pointers valid, proceeding...
+DEBUG gat_kernel_0: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_0: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_0: All pointers valid, proceeding...
+DEBUG gat_kernel_1: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_1: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_1: All pointers valid, proceeding...
+DEBUG gat_kernel_1: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_1: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_1: All pointers valid, proceeding...
+DEBUG gat_kernel_2: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_2: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_2: All pointers valid, proceeding...
+DEBUG gat_kernel_2: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_2: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_2: All pointers valid, proceeding...
+DEBUG gat_kernel_3: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_3: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_3: All pointers valid, proceeding...
+DEBUG gat_kernel_3: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_3: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_3: All pointers valid, proceeding...
+DEBUG gat_kernel_4: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_4: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_4: All pointers valid, proceeding...
+DEBUG gat_kernel_4: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_4: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_4: All pointers valid, proceeding...
+DEBUG gat_kernel_5: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_5: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_5: All pointers valid, proceeding...
+DEBUG gat_kernel_5: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_5: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_5: All pointers valid, proceeding...
+DEBUG gat_kernel_6: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_6: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_6: All pointers valid, proceeding...
+DEBUG gat_kernel_6: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_6: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_6: All pointers valid, proceeding...
+DEBUG gat_kernel_7: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_7: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_7: All pointers valid, proceeding...
+DEBUG gat_kernel_7: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_7: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_7: All pointers valid, proceeding...
+DEBUG gat_kernel_8: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_8: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_8: All pointers valid, proceeding...
+DEBUG gat_kernel_8: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_8: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_8: All pointers valid, proceeding...
+DEBUG gat_kernel_9: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_9: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_9: All pointers valid, proceeding...
+DEBUG gat_kernel_9: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_9: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_9: All pointers valid, proceeding...
+DEBUG gat_kernel_10: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_10: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_10: All pointers valid, proceeding...
+DEBUG gat_kernel_10: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_10: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_10: All pointers valid, proceeding...
+DEBUG gat_kernel_11: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_11: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_11: All pointers valid, proceeding...
+DEBUG gat_kernel_11: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_11: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_11: All pointers valid, proceeding...
+DEBUG gat_kernel_12: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_12: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_12: All pointers valid, proceeding...
+DEBUG gat_kernel_12: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_12: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_12: All pointers valid, proceeding...
+DEBUG gat_kernel_13: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_13: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_13: All pointers valid, proceeding...
+DEBUG gat_kernel_13: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_13: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_13: All pointers valid, proceeding...
+DEBUG gat_kernel_14: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_14: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_14: All pointers valid, proceeding...
+DEBUG gat_kernel_14: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_14: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_14: All pointers valid, proceeding...
+DEBUG gat_kernel_15: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_15: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_15: All pointers valid, proceeding...
+DEBUG gat_kernel_15: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_15: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_15: All pointers valid, proceeding...
+DEBUG gat_kernel_16: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_16: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_16: All pointers valid, proceeding...
+DEBUG gat_kernel_16: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_16: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_16: All pointers valid, proceeding...
+DEBUG gat_kernel_17: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_17: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_17: All pointers valid, proceeding...
+DEBUG gat_kernel_17: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_17: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_17: All pointers valid, proceeding...
+DEBUG gat_kernel_18: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_18: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_18: All pointers valid, proceeding...
+DEBUG gat_kernel_18: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_18: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_18: All pointers valid, proceeding...
+DEBUG gat_kernel_19: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_19: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_19: All pointers valid, proceeding...
+DEBUG gat_kernel_19: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_19: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_19: All pointers valid, proceeding...
+DEBUG gat_kernel_20: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_20: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_20: All pointers valid, proceeding...
+DEBUG gat_kernel_20: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_20: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_20: All pointers valid, proceeding...
+DEBUG gat_kernel_21: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_21: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_21: All pointers valid, proceeding...
+DEBUG gat_kernel_21: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_21: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_21: All pointers valid, proceeding...
+DEBUG gat_kernel_22: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_22: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_22: All pointers valid, proceeding...
+DEBUG gat_kernel_22: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_22: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_22: All pointers valid, proceeding...
+DEBUG gat_kernel_23: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_23: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_23: All pointers valid, proceeding...
+DEBUG gat_kernel_23: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_23: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_23: All pointers valid, proceeding...
+DEBUG gat_kernel_24: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_24: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_24: All pointers valid, proceeding...
+DEBUG gat_kernel_24: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_24: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_24: All pointers valid, proceeding...
+DEBUG gat_kernel_25: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_25: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_25: All pointers valid, proceeding...
+DEBUG gat_kernel_25: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_25: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_25: All pointers valid, proceeding...
+DEBUG gat_kernel_26: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_26: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_26: All pointers valid, proceeding...
+DEBUG gat_kernel_26: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_26: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_26: All pointers valid, proceeding...
+DEBUG gat_kernel_27: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_27: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_27: All pointers valid, proceeding...
+DEBUG gat_kernel_27: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_27: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_27: All pointers valid, proceeding...
+DEBUG gat_kernel_28: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_28: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_28: All pointers valid, proceeding...
+DEBUG gat_kernel_28: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_28: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_28: All pointers valid, proceeding...
+DEBUG gat_kernel_29: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_29: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_29: All pointers valid, proceeding...
+DEBUG gat_kernel_29: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_29: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_29: All pointers valid, proceeding...
+DEBUG gat_kernel_30: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_30: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_30: All pointers valid, proceeding...
+DEBUG gat_kernel_30: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_30: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_30: All pointers valid, proceeding...
+DEBUG gat_kernel_31: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_31: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_31: All pointers valid, proceeding...
+DEBUG gat_kernel_31: info_addr=94412594928288, info_=0x55de252edaa0
+DEBUG gat_kernel_31: Checking pointers...
+  rp_info=0x7f87c7600000, rp_n=0x7f87c7a00000
+  ep_info=0x7f87d6600000, ep_n=0x7f87c7a00200
+  ng_info=0x7f87cae00000, ng_n=0x7f87c7a00400
+DEBUG gat_kernel_31: All pointers valid, proceeding...
+Input dimension: 128, Output dimension: 0
+Nodes: 169343, Edges: 1166243
+layer feature:  128 64 32
+Num nodes: 169343
+Num edges: 1335586
+Average degree: 7.89
+Variation degree: 4569.67
+Max degree: 13156.00
+DEBUG: About to call preprocessing...
+DEBUG: rowptr shape: torch.Size([169344]) dtype: torch.int32
+DEBUG: indices shape: torch.Size([1335586]) dtype: torch.int32
+DEBUG: preprocessing returned, info = 94412594928288 type = <class 'int'>
+preprocessing: 62.060 ms
+DEBUG: After preprocessing, before warmup
+warmup: 0.006 ms
+DEBUG: About to start kernel loop, info = 94412594928288
+DEBUG: About to call kernel 0 func_name = torch.ops.gatlib.gat_kernel_0(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 0 completed successfully
+test_kernel0: 3.680 ms
+DEBUG: About to call kernel 1 func_name = torch.ops.gatlib.gat_kernel_1(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 1 completed successfully
+test_kernel1: 4.603 ms
+DEBUG: About to call kernel 2 func_name = torch.ops.gatlib.gat_kernel_2(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 2 completed successfully
+test_kernel2: 3.643 ms
+DEBUG: About to call kernel 3 func_name = torch.ops.gatlib.gat_kernel_3(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 3 completed successfully
+test_kernel3: 5.773 ms
+DEBUG: About to call kernel 4 func_name = torch.ops.gatlib.gat_kernel_4(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 4 completed successfully
+test_kernel4: 5.161 ms
+DEBUG: About to call kernel 5 func_name = torch.ops.gatlib.gat_kernel_5(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 5 completed successfully
+test_kernel5: 5.221 ms
+DEBUG: About to call kernel 6 func_name = torch.ops.gatlib.gat_kernel_6(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 6 completed successfully
+test_kernel6: 3.640 ms
+DEBUG: About to call kernel 7 func_name = torch.ops.gatlib.gat_kernel_7(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 7 completed successfully
+test_kernel7: 4.092 ms
+DEBUG: About to call kernel 8 func_name = torch.ops.gatlib.gat_kernel_8(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 8 completed successfully
+test_kernel8: 3.964 ms
+DEBUG: About to call kernel 9 func_name = torch.ops.gatlib.gat_kernel_9(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 9 completed successfully
+test_kernel9: 3.821 ms
+DEBUG: About to call kernel 10 func_name = torch.ops.gatlib.gat_kernel_10(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 10 completed successfully
+test_kernel10: 3.724 ms
+DEBUG: About to call kernel 11 func_name = torch.ops.gatlib.gat_kernel_11(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 11 completed successfully
+test_kernel11: 5.151 ms
+DEBUG: About to call kernel 12 func_name = torch.ops.gatlib.gat_kernel_12(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 12 completed successfully
+test_kernel12: 5.247 ms
+DEBUG: About to call kernel 13 func_name = torch.ops.gatlib.gat_kernel_13(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 13 completed successfully
+test_kernel13: 6.039 ms
+DEBUG: About to call kernel 14 func_name = torch.ops.gatlib.gat_kernel_14(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 14 completed successfully
+test_kernel14: 3.381 ms
+DEBUG: About to call kernel 15 func_name = torch.ops.gatlib.gat_kernel_15(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 15 completed successfully
+test_kernel15: 4.055 ms
+DEBUG: About to call kernel 16 func_name = torch.ops.gatlib.gat_kernel_16(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 16 completed successfully
+test_kernel16: 4.371 ms
+DEBUG: About to call kernel 17 func_name = torch.ops.gatlib.gat_kernel_17(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 17 completed successfully
+test_kernel17: 4.495 ms
+DEBUG: About to call kernel 18 func_name = torch.ops.gatlib.gat_kernel_18(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 18 completed successfully
+test_kernel18: 4.586 ms
+DEBUG: About to call kernel 19 func_name = torch.ops.gatlib.gat_kernel_19(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 19 completed successfully
+test_kernel19: 5.983 ms
+DEBUG: About to call kernel 20 func_name = torch.ops.gatlib.gat_kernel_20(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 20 completed successfully
+test_kernel20: 5.391 ms
+DEBUG: About to call kernel 21 func_name = torch.ops.gatlib.gat_kernel_21(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 21 completed successfully
+test_kernel21: 6.180 ms
+DEBUG: About to call kernel 22 func_name = torch.ops.gatlib.gat_kernel_22(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 22 completed successfully
+test_kernel22: 3.887 ms
+DEBUG: About to call kernel 23 func_name = torch.ops.gatlib.gat_kernel_23(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 23 completed successfully
+test_kernel23: 4.859 ms
+DEBUG: About to call kernel 24 func_name = torch.ops.gatlib.gat_kernel_24(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 24 completed successfully
+test_kernel24: 4.137 ms
+DEBUG: About to call kernel 25 func_name = torch.ops.gatlib.gat_kernel_25(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 25 completed successfully
+test_kernel25: 4.180 ms
+DEBUG: About to call kernel 26 func_name = torch.ops.gatlib.gat_kernel_26(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 26 completed successfully
+test_kernel26: 4.666 ms
+DEBUG: About to call kernel 27 func_name = torch.ops.gatlib.gat_kernel_27(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 27 completed successfully
+test_kernel27: 5.373 ms
+DEBUG: About to call kernel 28 func_name = torch.ops.gatlib.gat_kernel_28(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 28 completed successfully
+test_kernel28: 4.508 ms
+DEBUG: About to call kernel 29 func_name = torch.ops.gatlib.gat_kernel_29(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 29 completed successfully
+test_kernel29: 7.004 ms
+DEBUG: About to call kernel 30 func_name = torch.ops.gatlib.gat_kernel_30(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 30 completed successfully
+test_kernel30: 4.192 ms
+DEBUG: About to call kernel 31 func_name = torch.ops.gatlib.gat_kernel_31(info, rowptr, indices, fd, f, fo, we, lr, e, em, es, h, ho)
+DEBUG: Kernel 31 completed successfully
+test_kernel31: 4.491 ms
+best i 14 best time: 3.3805249840952456
