@@ -5,9 +5,6 @@ datasets/
 test/__pycache__/
 test/lib/__pycache__/
 
-# Generated DSL source code (can be regenerated)
-gen_src/
-
 # Build artifacts
 *.so
 *.o

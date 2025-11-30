@@ -7,7 +7,6 @@ This guide provides step-by-step instructions to reproduce the GNNPilot paper re
 - Linux OS (tested on Ubuntu 20.04)
 - NVIDIA GPU with CUDA support (tested on GTX 1060 6GB)
 - Anaconda/Miniconda
-- Git
 
 ## Step 1: Environment Setup
 
@@ -15,7 +14,7 @@ This guide provides step-by-step instructions to reproduce the GNNPilot paper re
 
 ```bash
 # Create new environment
-conda create -n gnnpilot python=3.8
+conda create -n gnnpilot python=3.9
 conda activate gnnpilot
 ```
 
@@ -71,12 +70,8 @@ EOF
 
 ```bash
 # Clone the repository (or your fork)
-git clone https://github.com/PKUZHOU/GNNPilot.git
+git clone https://github.com/USTC-ADA/GNNPilot
 cd GNNPilot
-
-# Or if using your reproduction repository
-git clone <your-reproduction-repo>
-cd hipeac-gnnpilot-reproduce
 ```
 
 ## Step 3: Build KG_GNN Module (Core CUDA Kernels)
@@ -102,13 +97,6 @@ Edit `KG_GNN/cmake.sh` and update line 4:
 -DCMAKE_PREFIX_PATH=$TORCH_PATH \
 ```
 
-Or use sed to update automatically:
-
-```bash
-# Automatic update (recommended)
-TORCH_PATH=$(python -c "import torch; print(torch.__path__[0])")
-sed -i "s|/home/pkusc/.conda/envs/torch110|$TORCH_PATH|g" cmake.sh
-```
 
 ### 3.2 Build KG_GNN
 
@@ -138,9 +126,8 @@ python dsl_run.py example_gat_layer.txt gat
 ```
 
 This generates:
-- `gen_src/gat/gat.cpp` - C++ wrapper code
-- `gen_src/gat/gat.cu` - CUDA kernel implementations (32 variants)
-- `gen_src/gat/CMakeLists.txt` - Build configuration
+- `gat.cu` - CUDA kernel implementations (32 variants)
+- `CMakeLists.txt` - Build configuration
 
 ### 4.2 Build GAT Library
 
@@ -157,8 +144,7 @@ cmake -DCMAKE_PREFIX_PATH="$TORCH_PATH" \
 
 # Note: Adjust CUDA_ARCH for your GPU
 # GTX 1060: 61
-# RTX 2080: 75
-# RTX 3090: 86
+# RTX 3080: 86
 
 # Build
 make -j4

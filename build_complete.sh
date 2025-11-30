@@ -103,17 +103,8 @@ fi
 echo "Running DSL code generator..."
 python dsl_run.py example_gat_layer.txt gat
 
-# Check if code was generated
-if [ ! -d "gen_src/gat" ]; then
-    echo -e "${RED}❌ DSL code generation failed - gen_src/gat not found${NC}"
-    exit 1
-fi
-
 echo -e "${GREEN}✓ DSL code generated successfully${NC}"
-echo "Generated files:"
-ls -lh gen_src/gat/
 
-echo ""
 
 # Step 3: Build GAT library
 echo "=== Step 3: Building GAT Library ==="
@@ -184,8 +175,7 @@ echo "  2. build/libgat.so"
 echo ""
 
 echo "Generated source:"
-echo "  - gen_src/gat/gat.cu (CUDA kernels)"
-echo "  - gen_src/gat/gat.cpp (PyTorch wrapper)"
+echo "  - gat.cu (CUDA kernels)"
 echo ""
 
 echo "Next steps:"

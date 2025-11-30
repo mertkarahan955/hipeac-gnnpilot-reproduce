@@ -135,12 +135,6 @@ torch.ops.gatlib.gat_kernel_0(info, rowptr, indices, fd, f, fo, we, lr, e, em, e
 
 ## Troubleshooting
 
-### Missing preprocessing files
-
-**Error:** `preprocessing.h: No such file or directory`
-
-**Solution:** Ensure `preprocessing_src/preprocessing.h` and `preprocessing_src/preprocessing.cu` exist in the repository root.
-
 ### CMake can't find Torch
 
 **Error:** `Could not find a package configuration file provided by "Torch"`
@@ -154,13 +148,11 @@ cmake -DCMAKE_PREFIX_PATH="$(python -c 'import torch; print(torch.__path__[0])')
 
 **Error:** CUDA compilation errors or "no kernel image is available"
 
-**Solution:** Set `CUDA_ARCH` to match your GPU:
-```bash
-# Check your GPU compute capability
-nvidia-smi --query-gpu=compute_cap --format=csv
+**Solution:** Set `CUDA_ARCH` to match your GPU
+
 
 # Set in CMake
-cmake -DCUDA_ARCH=75 ..  # Example for T4 (sm_75)
+cmake -DCUDA_ARCH=61 ..  # Example for GTX1060 (sm_61)
 ```
 
 ### Library not found in Python
@@ -215,5 +207,4 @@ python test_kernel.py ../bcsstk13.mtx
 - The generated code creates multiple kernel versions (e.g., `gat_kernel_0` through `gat_kernel_31`) with different optimization strategies
 - Preprocessing files (`preprocessing_src/`) are **static** and shared across all DSL builds
 - Each DSL build creates a separate library with its own namespace
-- The `long_dynamic` parameter in preprocessing is currently unused but reserved for future optimizations
 
