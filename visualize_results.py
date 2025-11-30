@@ -157,9 +157,8 @@ def plot_kernel_comparison(df, save_path="kernel_comparison.png"):
 def plot_strategy_analysis(df, save_path="strategy_analysis.png"):
     """
     Plot Section 3.2 & 3.3: Neighbor packing vs Bin packing analysis
+    Creates TWO separate figures for better readability in IEEE format
     """
-    plt.figure(figsize=(15, 10))
-
     # Set larger font sizes for better readability
     TITLE_FONTSIZE = 14
     LABEL_FONTSIZE = 12
@@ -167,74 +166,93 @@ def plot_strategy_analysis(df, save_path="strategy_analysis.png"):
     LEGEND_FONTSIZE = 11
 
     # Analyze different optimization strategies based on kernel IDs
-    # Assuming kernel IDs encode different strategies
     df['gather_strategy'] = (df['strategy'] % 2).map({0: 'node-edge', 1: 'edge-based'})
     df['scatter_strategy'] = ((df['strategy'] // 2) % 2).map({0: 'node-edge', 1: 'edge-based'})
     df['dimension_strategy'] = ((df['strategy'] // 4) % 3).map({0: 'node-dim', 1: 'edge-dim', 2: 'node-global-dim'})
     df['fusion_strategy'] = ((df['strategy'] // 12) % 3).map({0: 'no-fusion', 1: 'node-edge', 2: 'all-dim'})
 
-    # Gather strategy performance
-    plt.subplot(2, 3, 1)
+    # Extract base path and extension
+    from pathlib import Path
+    path = Path(save_path)
+    base_name = path.stem
+    extension = path.suffix
+    output_dir = path.parent
+
+    # ========================================
+    # FIGURE 1: Basic Optimization Strategies (1x3 layout)
+    # ========================================
+    fig1 = plt.figure(figsize=(15, 4.5))
+
+    # (a) Gather strategy performance
+    plt.subplot(1, 3, 1)
     gather_perf = df.groupby('gather_strategy')['execution_time'].mean()
     plt.bar(gather_perf.index, gather_perf.values, color=['skyblue', 'lightcoral'])
-    plt.title('Section 3.2: Gather Strategy Performance', fontsize=TITLE_FONTSIZE, fontweight='bold')
+    plt.title('(a) Gather Strategy Performance', fontsize=TITLE_FONTSIZE, fontweight='bold')
     plt.xlabel('Gather Strategy', fontsize=LABEL_FONTSIZE)
     plt.ylabel('Avg Execution Time (ms)', fontsize=LABEL_FONTSIZE)
     plt.xticks(rotation=45, fontsize=TICK_FONTSIZE)
-    
     plt.yticks(fontsize=TICK_FONTSIZE)
-
-    # Add performance numbers on bars
     for i, v in enumerate(gather_perf.values):
         plt.text(i, v + max(gather_perf.values) * 0.01, f'{v:.3f}ms',
                 ha='center', va='bottom', fontsize=TICK_FONTSIZE)
 
-    # Scatter strategy performance
-    plt.subplot(2, 3, 2)
+    # (b) Scatter strategy performance
+    plt.subplot(1, 3, 2)
     scatter_perf = df.groupby('scatter_strategy')['execution_time'].mean()
     plt.bar(scatter_perf.index, scatter_perf.values, color=['lightgreen', 'orange'])
-    plt.title('Section 3.3: Scatter Strategy Performance', fontsize=TITLE_FONTSIZE, fontweight='bold')
+    plt.title('(b) Scatter Strategy Performance', fontsize=TITLE_FONTSIZE, fontweight='bold')
     plt.xlabel('Scatter Strategy', fontsize=LABEL_FONTSIZE)
     plt.ylabel('Avg Execution Time (ms)', fontsize=LABEL_FONTSIZE)
     plt.xticks(rotation=45, fontsize=TICK_FONTSIZE)
     plt.yticks(fontsize=TICK_FONTSIZE)
 
-    # Fusion strategy performance
-    plt.subplot(2, 3, 3)
+    # (c) Dimension strategy performance
+    plt.subplot(1, 3, 3)
+    dim_perf = df.groupby('dimension_strategy')['execution_time'].mean()
+    plt.bar(dim_perf.index, dim_perf.values, color=['cyan', 'magenta', 'yellow'])
+    plt.title('(c) Dimension Parallelization', fontsize=TITLE_FONTSIZE, fontweight='bold')
+    plt.xlabel('Dimension Strategy', fontsize=LABEL_FONTSIZE)
+    plt.ylabel('Avg Execution Time (ms)', fontsize=LABEL_FONTSIZE)
+    plt.xticks(rotation=45, fontsize=TICK_FONTSIZE)
+    plt.yticks(fontsize=TICK_FONTSIZE)
+
+    plt.tight_layout()
+    fig1_path = output_dir / f"{base_name}_part1{extension}"
+    plt.savefig(fig1_path, dpi=300, bbox_inches='tight')
+    plt.show()
+    print(f"Strategy analysis part 1 saved to {fig1_path}")
+
+    # ========================================
+    # FIGURE 2: Advanced Analysis (1x3 layout)
+    # ========================================
+    fig2 = plt.figure(figsize=(15, 4.5))
+
+    # (a) Fusion strategy performance
+    plt.subplot(1, 3, 1)
     fusion_perf = df.groupby('fusion_strategy')['execution_time'].mean()
     colors = ['gold', 'mediumpurple', 'lightpink'][:len(fusion_perf)]
     plt.bar(fusion_perf.index, fusion_perf.values, color=colors)
-    plt.title('Section 4.3: Kernel Fusion Performance', fontsize=TITLE_FONTSIZE, fontweight='bold')
+    plt.title('(a) Kernel Fusion Performance', fontsize=TITLE_FONTSIZE, fontweight='bold')
     plt.xlabel('Fusion Strategy', fontsize=LABEL_FONTSIZE)
     plt.ylabel('Avg Execution Time (ms)', fontsize=LABEL_FONTSIZE)
     plt.xticks(rotation=45, fontsize=TICK_FONTSIZE)
     plt.yticks(fontsize=TICK_FONTSIZE)
 
-    # Dimension strategy performance
-    plt.subplot(2, 3, 4)
-    dim_perf = df.groupby('dimension_strategy')['execution_time'].mean()
-    plt.bar(dim_perf.index, dim_perf.values, color=['cyan', 'magenta', 'yellow'])
-    plt.title('Section 4.2: Dimension Parallelization', fontsize=TITLE_FONTSIZE, fontweight='bold')
-    plt.xlabel('Dimension Strategy', fontsize=LABEL_FONTSIZE)
-    plt.ylabel('Avg Execution Time (ms)', fontsize=LABEL_FONTSIZE)
-    plt.xticks(rotation=45, fontsize=TICK_FONTSIZE)
-    plt.yticks(fontsize=TICK_FONTSIZE)
-    
-    # Heatmap of strategy combinations
-    plt.subplot(2, 3, 5)
+    # (b) Heatmap of strategy combinations
+    plt.subplot(1, 3, 2)
     pivot = df.pivot_table(values='execution_time',
                           index='gather_strategy',
                           columns='fusion_strategy',
                           aggfunc='mean')
     sns.heatmap(pivot, annot=True, fmt='.3f', cmap='viridis', annot_kws={'fontsize': TICK_FONTSIZE})
-    plt.title('Strategy Combination Heatmap', fontsize=TITLE_FONTSIZE, fontweight='bold')
+    plt.title('(b) Strategy Combination Heatmap', fontsize=TITLE_FONTSIZE, fontweight='bold')
     plt.xlabel('Fusion Strategy', fontsize=LABEL_FONTSIZE)
     plt.ylabel('Gather Strategy', fontsize=LABEL_FONTSIZE)
     plt.xticks(fontsize=TICK_FONTSIZE)
     plt.yticks(fontsize=TICK_FONTSIZE)
 
-    # Best strategy identification
-    plt.subplot(2, 3, 6)
+    # (c) Best strategy identification
+    plt.subplot(1, 3, 3)
     best_combinations = df.groupby(['gather_strategy', 'scatter_strategy', 'fusion_strategy'])['execution_time'].mean().sort_values()
     top_5 = best_combinations.head(5)
 
@@ -243,13 +261,19 @@ def plot_strategy_analysis(df, save_path="strategy_analysis.png"):
     plt.yticks(range(len(top_5)), labels, fontsize=TICK_FONTSIZE)
     plt.xticks(fontsize=TICK_FONTSIZE)
     plt.xlabel('Execution Time (ms)', fontsize=LABEL_FONTSIZE)
-    plt.title('Top 5 Strategy Combinations', fontsize=TITLE_FONTSIZE, fontweight='bold')
+    plt.title('(c) Top 5 Strategy Combinations', fontsize=TITLE_FONTSIZE, fontweight='bold')
     plt.gca().invert_yaxis()
-    
+
     plt.tight_layout()
-    plt.savefig(save_path, dpi=300, bbox_inches='tight')
+    fig2_path = output_dir / f"{base_name}_part2{extension}"
+    plt.savefig(fig2_path, dpi=300, bbox_inches='tight')
     plt.show()
-    print(f"Strategy analysis plot saved to {save_path}")
+    print(f"Strategy analysis part 2 saved to {fig2_path}")
+
+    # Also save the original combined version for backward compatibility
+    print(f"Note: Strategy analysis split into two files:")
+    print(f"  - {fig1_path} (Basic strategies)")
+    print(f"  - {fig2_path} (Advanced analysis)")
 
 def plot_dataset_scalability(df, save_path="dataset_scalability.png"):
     """
