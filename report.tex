@@ -128,20 +128,27 @@ The best kernel selection varies by graph structure: kernel 1 dominates small sp
 
 \subsection{Strategy Analysis and Packing Effects}
 
-The detailed per-strategy analysis across all 9 datasets, shown in Fig.~\ref{fig:strategy_basic} and Fig.~\ref{fig:strategy_advanced}, highlights how gather, scatter, and fusion strategies interact. Neighbor-packing–based kernels (kernel 1) consistently outperformed edge-based variants for sparse graphs with low average degree. Bin-packing strategies (kernels 0, 15) showed clear benefits for larger, higher-degree graphs (caidaRouterLevel, ogbn-arxiv), confirming Section 3.3's claims about improved data locality.
+The detailed per-strategy analysis across all 9 datasets, shown in Fig.~\ref{fig:strategy_basic}, Fig.~\ref{fig:strategy_advanced}, and Fig.~\ref{fig:strategy_heatmap}, highlights how gather, scatter, dimension, and fusion strategies interact. Neighbor-packing–based kernels (kernel 1) consistently outperformed edge-based variants for sparse graphs with low average degree. Bin-packing strategies (kernels 0, 15) showed clear benefits for larger, higher-degree graphs (caidaRouterLevel, ogbn-arxiv), confirming Section 3.3's claims about improved data locality. The strategy combination heatmap (Fig.~\ref{fig:strategy_heatmap}a) reveals systematic patterns in how gather and fusion strategies combine, while the top-5 combinations (Fig.~\ref{fig:strategy_heatmap}b) demonstrate that node-edge-based strategies dominate across most graph types.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=\columnwidth]{figures/multi_dataset_results/strategy_analysis_part1.png}
-\caption{Basic optimization strategy performance across 9 datasets: (a) Gather strategies showing neighbor-packing dominance for sparse graphs, (b) Scatter strategies with node-edge variants outperforming edge-based approaches, (c) Dimension parallelization strategies (node-dim, edge-dim, node-global-dim).}
+\caption{Basic optimization strategy performance across 9 datasets: (a) Gather strategies showing neighbor-packing dominance for sparse graphs, (b) Scatter strategies with node-edge variants outperforming edge-based approaches.}
 \label{fig:strategy_basic}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\columnwidth]{figures/multi_datasets_results/strategy_analysis_part2.png}
-\caption{Advanced strategy analysis: (a) Kernel fusion performance showing benefits of multi-operator optimization, (b) Strategy combination heatmap illustrating interaction between gather and fusion strategies, (c) Top 5 performing strategy combinations across all 9 datasets.}
+\includegraphics[width=\columnwidth]{figures/multi_dataset_results/strategy_analysis_part2.png}
+\caption{Advanced strategy analysis: (a) Dimension parallelization showing performance of node-dim, edge-dim, and node-global-dim strategies, (b) Kernel fusion performance demonstrating benefits of multi-operator optimization across no-fusion, node-edge, and all-dim fusion strategies.}
 \label{fig:strategy_advanced}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{figures/multi_dataset_results/strategy_analysis_part3.png}
+\caption{Strategy combination analysis: (a) Heatmap illustrating interaction between gather and fusion strategies showing execution time patterns, (b) Top 5 performing strategy combinations across all 9 datasets ranked by average execution time.}
+\label{fig:strategy_heatmap}
 \end{figure}
 
 \subsection{End-to-End Performance and Scalability}
